@@ -5,7 +5,7 @@ Docente: Ing. Gloriana Peña Ramírez
 
 Aplicación web desarrollada con **React + TypeScript + Vite** que consulta la API REST pública de Villa Peñas y muestra sus paquetes y servicios adicionales, sin modificar el backend.
 
-- **Estudiante:** TU NOMBRE COMPLETO
+- **Estudiante:** Juan Diego Carmona Duarte
 - **Repositorio:** https://github.com/ellerucks/villa-penas-app-exam
 - **API:** https://villa-penas-production.up.railway.app
 - **Documentación Swagger:** https://villa-penas-production.up.railway.app/api/docs
