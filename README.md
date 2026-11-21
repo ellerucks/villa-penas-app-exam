@@ -1,32 +1,49 @@
-# React + TypeScript + Vite
+# Villa Peñas · Consumo de API REST
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Examen práctico de Programación III · Universidad Nacional, Sede Regional Chorotega, Campus Nicoya
+Docente: Ing. Gloriana Peña Ramírez
 
-Currently, two official plugins are available:
+Aplicación web desarrollada con **React + TypeScript + Vite** que consulta la API REST pública de Villa Peñas y muestra sus paquetes y servicios adicionales, sin modificar el backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Estudiante:** TU NOMBRE COMPLETO
+- **Repositorio:** https://github.com/ellerucks/villa-penas-app-exam
+- **API:** https://villa-penas-production.up.railway.app
+- **Documentación Swagger:** https://villa-penas-production.up.railway.app/api/docs
 
-## React Compiler
+## Cómo iniciar el proyecto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Requisitos: Node.js 18 o superior y npm.
 
-## Expanding the Oxlint configuration
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/ellerucks/villa-penas-app-exam.git
+   cd villa-penas-app-exam
+   ```
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+3. Crear el archivo de entorno copiando el ejemplo:
+   ```bash
+   cp .env.example .env
+   ```
+   En Windows (PowerShell): `copy .env.example .env`. El archivo contiene:
+   ```
+   VITE_API_URL=https://villa-penas-production.up.railway.app
+   ```
+4. Iniciar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+5. Abrir http://localhost:5173. El puerto está fijo en 5173 porque es uno de los orígenes autorizados por CORS en la API.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Para verificar tipos: `npx tsc --noEmit -p tsconfig.app.json`.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Endpoints consumidos
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Todos son operaciones **GET públicas** que, según Swagger, no requieren credenciales. No se usa ningún endpoint con autenticación.
+
+| Endpoint | Datos relevantes | Uso en la interfaz |
+|---|---|---|
+| `GET /public/paquetes` | nombre, descripción, precio en colones, servicios incluidos | Catálogo con búsqueda por texto y filtro por precio máximo |
+| `GET /public/paquetes/{id}` | datos del paquete y sus servicios con descripción y
