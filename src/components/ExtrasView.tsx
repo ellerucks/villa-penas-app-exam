@@ -3,10 +3,12 @@ import { useFetch } from "../hooks/useFetch";
 import { getExtras } from "../services/extrasService";
 import AsyncState from "./AsyncState";
 import ExtraCard from "./ExtraCard";
+import ExtraDetail from "./ExtraDetail";
 
 export default function ExtrasView() {
     const { data, loading, error } = useFetch(getExtras);
     const [producto, setProducto] = useState("todos");
+    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     const productos = useMemo(
         () => Array.from(new Set((data ?? []).map((e) => e.productoAdicional.nombre))),
@@ -38,10 +40,14 @@ export default function ExtrasView() {
             <AsyncState loading={loading} error={error} isEmpty={filtered.length === 0}>
                 <div className="grid">
                     {filtered.map((e) => (
-                        <ExtraCard key={e.id} extra={e} />
+                        <ExtraCard key={e.id} extra={e} onSelect={setSelectedId} />
                     ))}
                 </div>
             </AsyncState>
+
+            {selectedId !== null && (
+                <ExtraDetail id={selectedId} onClose={() => setSelectedId(null)} />
+            )}
         </section>
     );
 }

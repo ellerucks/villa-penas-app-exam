@@ -1,9 +1,13 @@
-
 import type { OpcionExtra } from "../types/extra";
 import { assetUrl } from "../services/http";
 import { colones } from "../utils/format";
 
-export default function ExtraCard({ extra }: { extra: OpcionExtra }) {
+interface Props {
+    extra: OpcionExtra;
+    onSelect?: (id: number) => void;
+}
+
+export default function ExtraCard({ extra, onSelect }: Props) {
     const img = assetUrl(extra.productoAdicional.imagenUrl);
     return (
         <article className="card">
@@ -15,6 +19,7 @@ export default function ExtraCard({ extra }: { extra: OpcionExtra }) {
                 {extra.cantidadIncluida} {extra.unidadMedida} · para {extra.cantidadPersonas} personas
             </p>
             <p className="price">{colones(extra.precioVentaColones)}</p>
+            {onSelect && <button onClick={() => onSelect(extra.id)}>Ver detalle</button>}
         </article>
     );
 }
